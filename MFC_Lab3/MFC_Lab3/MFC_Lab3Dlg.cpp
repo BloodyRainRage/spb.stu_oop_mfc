@@ -1,11 +1,11 @@
 ﻿
-// MFC_Lab2Dlg.cpp: файл реализации
+// MFC_Lab3Dlg.cpp: файл реализации
 //
 
 #include "pch.h"
 #include "framework.h"
-#include "MFC_Lab2.h"
-#include "MFC_Lab2Dlg.h"
+#include "MFC_Lab3.h"
+#include "MFC_Lab3Dlg.h"
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
@@ -30,7 +30,7 @@ public:
 
 // Реализация
 protected:
-	DECLARE_MESSAGE_MAP()
+	DECLARE_MESSAGE_MAP();	
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -46,40 +46,34 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// Диалоговое окно CMFCLab2Dlg
+// Диалоговое окно CMFCLab3Dlg
 
 
 
-CMFCLab2Dlg::CMFCLab2Dlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_MFC_LAB2_DIALOG, pParent)
-	, m_TestEdit(_T("")), m_Visible(FALSE), m_Enable(FALSE) {
+CMFCLab3Dlg::CMFCLab3Dlg(CWnd* pParent /*=nullptr*/)
+	: CDialogEx(IDD_MFC_LAB3_DIALOG, pParent)
+{
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-void CMFCLab2Dlg::DoDataExchange(CDataExchange* pDX)
+void CMFCLab3Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	//  DDX_Control(pDX, IDC_TEST_EDIT, m_TestEdit);
-	DDX_Text(pDX, IDC_TEST_EDIT, m_TestEdit);
-	DDX_Check(pDX, IDC_EDIT_VISIBLE, m_Visible);
-	DDX_Check(pDX, IDC_EDIT_ENABLE, m_Enable);
 }
 
-BEGIN_MESSAGE_MAP(CMFCLab2Dlg, CDialogEx)
+BEGIN_MESSAGE_MAP(CMFCLab3Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_CLEAR_BTN, &CMFCLab2Dlg::OnBnClickedClearBtn)
-	ON_BN_CLICKED(IDC_EXIT_BTN, &CMFCLab2Dlg::OnBnClickedExitBtn)
-	ON_BN_CLICKED(IDC_EDIT_VISIBLE, &CMFCLab2Dlg::OnBnClickedEditVisible)
-	ON_BN_CLICKED(IDC_EDIT_ENABLE, &CMFCLab2Dlg::OnBnClickedEditEnable)
-	ON_EN_CHANGE(IDC_TEST_EDIT, &CMFCLab2Dlg::OnEnChangeTestEdit)
+	ON_BN_CLICKED(IDC_BUTTON1, &CMFCLab3Dlg::OnBnClickedButton1)
+	ON_WM_MOUSEMOVE()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
-// Обработчики сообщений CMFCLab2Dlg
+// Обработчики сообщений CMFCLab3Dlg
 
-BOOL CMFCLab2Dlg::OnInitDialog()
+BOOL CMFCLab3Dlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
@@ -110,18 +104,10 @@ BOOL CMFCLab2Dlg::OnInitDialog()
 
 	// TODO: добавьте дополнительную инициализацию
 
-	m_Visible = TRUE; 	
-	m_Enable = TRUE; 
-	m_TestEdit = "bruh";
-	//GetDlgItem(IDC_TEST_EDIT)->SetWindowText(L"bruh");
-	
-	UpdateData(FALSE);
-	//MessageBox(m_TestEdit);
-
 	return TRUE;  // возврат значения TRUE, если фокус не передан элементу управления
 }
 
-void CMFCLab2Dlg::OnSysCommand(UINT nID, LPARAM lParam)
+void CMFCLab3Dlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
@@ -138,7 +124,7 @@ void CMFCLab2Dlg::OnSysCommand(UINT nID, LPARAM lParam)
 //  чтобы нарисовать значок.  Для приложений MFC, использующих модель документов или представлений,
 //  это автоматически выполняется рабочей областью.
 
-void CMFCLab2Dlg::OnPaint()
+void CMFCLab3Dlg::OnPaint()
 {
 	if (IsIconic())
 	{
@@ -165,75 +151,39 @@ void CMFCLab2Dlg::OnPaint()
 
 // Система вызывает эту функцию для получения отображения курсора при перемещении
 //  свернутого окна.
-HCURSOR CMFCLab2Dlg::OnQueryDragIcon()
+HCURSOR CMFCLab3Dlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
 
 
-void CMFCLab2Dlg::OnBnClickedClearBtn() {
-	//SetDlgItemText(IDC_TEST_EDIT, L"");
-	m_TestEdit = "";
-	UpdateData(FALSE);
-	
-}
-
-
-void CMFCLab2Dlg::OnBnClickedExitBtn() {
+void CMFCLab3Dlg::OnBnClickedButton1() {
 	OnOK();
 }
 
 
-void CMFCLab2Dlg::OnBnClickedEditVisible() {
-	
-	UpdateData(TRUE);
-	if(m_Visible == TRUE)
-		GetDlgItem(IDC_TEST_EDIT)->ShowWindow(SW_SHOW);
-	else GetDlgItem(IDC_TEST_EDIT)->ShowWindow(SW_HIDE);
+void CMFCLab3Dlg::OnMouseMove(UINT nFlags, CPoint point) {
+	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
+	if ((nFlags & MK_LBUTTON) == MK_LBUTTON) {
+		CClientDC dc(this);
+		//dc.SetPixel(point.x, point.y, RGB(0, 0, 0));
 
-}
-
-
-void CMFCLab2Dlg::OnBnClickedEditEnable() {
-	UpdateData(TRUE);
-	if (m_Enable == TRUE)
-		GetDlgItem(IDC_TEST_EDIT)->EnableWindow(SW_SHOW);
-	else GetDlgItem(IDC_TEST_EDIT)->EnableWindow(SW_HIDE);
-}
-
-
-void CMFCLab2Dlg::OnEnChangeTestEdit() {
-	// TODO:  Если это элемент управления RICHEDIT, то элемент управления не будет
-	// send this notification unless you override the CDialogEx::OnInitDialog()
-	// функция и вызов CRichEditCtrl().SetEventMask()
-	// with the ENM_CHANGE flag ORed into the mask.
-
-	// TODO:  Добавьте код элемента управления
-
-	UpdateData(TRUE);
-
-	CString data;
-	data = m_TestEdit;
-	data.MakeUpper();
-
-	if (data == "PAINT") {
-		system("C:\\WINDOWS\\system32\\mspaint.exe");
-		m_TestEdit = "";
+		CPen pen(PS_SOLID, 5, RGB(255, 0, 0));
+		dc.SelectObject(&pen);
 		
-	} else if (data == "CALCULATOR") {
-		system("calc.exe");
-		m_TestEdit = "";
-	} else if (data == "EXIT") OnBnClickedExitBtn();
-	else if (data == "BEEP")
-	{
-		MessageBeep((WORD)-2);
-		m_TestEdit = "";		
+		dc.MoveTo(m_PrevX, m_PrevY);
+		dc.LineTo(point.x, point.y);
+		m_PrevX = point.x;
+		m_PrevY = point.y;
 	}
+	CDialogEx::OnMouseMove(nFlags, point);
+}
 
 
-
-	UpdateData(FALSE);
-
-
+void CMFCLab3Dlg::OnLButtonDown(UINT nFlags, CPoint point) {
+	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
+	m_PrevX = point.x;
+	m_PrevY = point.y;
+	CDialogEx::OnLButtonDown(nFlags, point);
 }
