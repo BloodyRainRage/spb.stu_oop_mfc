@@ -175,7 +175,7 @@ void CMFCLab1Dlg::OnBnClickedExitBtn() {
 
 void CMFCLab1Dlg::OnBnClickedSayhelloBtn() {
 	
-	MessageBox(L"Bruh");
+	MessageBox(L"Hello");
 
 }
 

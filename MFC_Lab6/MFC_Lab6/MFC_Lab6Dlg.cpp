@@ -165,7 +165,7 @@ void CMFCLab6Dlg::OnBnClickedButton5() {
 	// TODO: добавьте свой код обработчика уведомлений
 
 	int iResults;
-	iResults = MessageBox(L"Do you really want to exit this amazing program? Bruh.",
+	iResults = MessageBox(L"Do you really want to exit this amazing program?",
 		L"Exit confirm",
 		MB_YESNO + MB_ICONEXCLAMATION);	
 
