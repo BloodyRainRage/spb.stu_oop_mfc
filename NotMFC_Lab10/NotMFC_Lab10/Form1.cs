@@ -30,6 +30,8 @@ namespace NotMFC_Lab10 {
                 this.BackgroundImageLayout = ImageLayout.Zoom;                
                 // image file path  
                 this.Text = open.FileName;
+
+                MessageBox.Show(open.FileName);
             }
         }
 

@@ -203,5 +203,5 @@ void CMFCLab5Dlg::OnHelpAbout() {
 void CMFCLab5Dlg::OnHelpBruh() {
 	// TODO: добавьте свой код обработчика команд
 
-	MessageBox(L"Bruh");
+	MessageBox(L"Hello");
 }
